@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>USUARIO</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f4f6f9;
+			margin: 0;
+			padding: 40px;
+		}
+
+		h1 {
+			color: #333;
+		}
+
+		a.button {
+			display: inline-block;
+			background-color: #28a745;
+			color: white;
+			padding: 8px 12px;
+			border-radius: 4px;
+			text-decoration: none;
+			margin-bottom: 20px;
+		}
+
+		a.button:hover {
+			background-color: #218838;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			background-color: #fff;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		th,
+		td {
+			padding: 12px 15px;
+			border: 1px solid #ddd;
+			text-align: left;
+		}
+
+		th {
+			background-color: #eb1e23;
+			color: white;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+
+		/* === Estilos de botones circulares === */
+		.btn-icon {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 36px;
+			height: 36px;
+			border-radius: 50%;
+			border: none;
+			color: white;
+			cursor: pointer;
+			font-size: 18px;
+			margin: 2px;
+			transition: transform 0.2s, opacity 0.2s;
+		}
+
+		.btn-icon.edit {
+			background-color: #007bff;
+		}
+
+		.btn-icon.delete {
+			background-color: #dc3545;
+		}
+
+		.btn-icon:hover {
+			opacity: 0.85;
+			transform: scale(1.1);
+		}
+
+		.actions {
+			text-align: center;
+		}
+
+		.actions form {
+			display: inline;
+		}
+
+		form {
+			display: inline;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>Listado de usuarios</h1>
+
+	<a href="/usuarios/new" class="button">➕ Crear Usuario</a>
+
+	<table>
+		<thead>
+			<tr>
+				<th style="width:10%;">Id</th>
+				<th style="width:30%;">Nombre</th>
+				<th style="width:40%;">Email</th>
+				<th style="width:20%;">Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="p : ${usuarios}">
+				<td th:text="${p.id}"></td>
+				<td th:text="${p.name}"></td>
+				<td th:text="${p.email}"></td>
+				<td class="actions">
+					<!-- Botón circular Editar -->
+					<a th:href="@{'/usuarios/edit/' + ${p.id}}" class="btn-icon edit" title="Editar">✏️</a>
+
+					<!-- Botón circular Eliminar -->
+					<form th:action="@{'/usuarios/delete/' + ${p.id}}" method="post">
+						<button type="submit" class="btn-icon delete" title="Eliminar">🗑️</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+
+</html>
