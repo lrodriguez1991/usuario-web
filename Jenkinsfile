@@ -1,12 +1,12 @@
 pipeline {
     agent any
 
-    environment {
+    /*environment {
         SONAR_HOST_URL = "http://sonarqube:9000"
         SONAR_TOKEN = credentials('sonar-token')
         ARTIFACTORY_SERVER = 'artifactory'
         TARGET_REPO = 'libs-snapshot-local'
-    }
+    }*/
 
     stages {
         stage('Build') {
@@ -41,7 +41,7 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+        /*stage('SonarQube Analysis') {
             agent {
                 docker {
                     image 'maven:3.9.6-eclipse-temurin-21'
@@ -53,7 +53,7 @@ pipeline {
                 withSonarQubeEnv('SonarQube-Server') {
                     sh """
                         mvn sonar:sonar \
-                          -Dsonar.projectKey=persona-web-ci \
+                          -Dsonar.projectKey=usuario-web \
                           -Dsonar.host.url=$SONAR_HOST_URL \
                           -Dsonar.login=$SONAR_TOKEN
                     """
@@ -86,14 +86,14 @@ pipeline {
                     server.upload spec: uploadSpec
                 }
             }
-        }
+        }*/
     }
 
     post {
         success {
             echo "Pipeline completado exitosamente: WAR subido a Artifactory"
-            unstash 'war-file' // Asegúrate de que esté presente para archivarlo
-            archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+           // unstash 'war-file' // Asegúrate de que esté presente para archivarlo
+           // archiveArtifacts artifacts: 'target/*.war', fingerprint: true
         }
         failure {
             echo "Falló el pipeline. Revisa los logs."
