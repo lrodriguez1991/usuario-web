@@ -1,12 +1,12 @@
 pipeline {
     agent any
 
-    /*environment {
-        SONAR_HOST_URL = "http://sonarqube:9000"
-        SONAR_TOKEN = credentials('sonar-token')
-        ARTIFACTORY_SERVER = 'artifactory'
+    environment {
+        //SONAR_HOST_URL = "http://sonarqube:9000"
+        //SONAR_TOKEN = credentials('sonar-token')
+        //ARTIFACTORY_SERVER = 'artifactory'
         TARGET_REPO = 'libs-snapshot-local'
-    }*/
+    }
 
     stages {
         stage('Build') {
