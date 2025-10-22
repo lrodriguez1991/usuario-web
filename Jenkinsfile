@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         SONAR_HOST_URL = "http://localhost:9000"
-        SONAR_TOKEN = credentials('sonar-credentials')
+        SONAR_TOKEN = credentials('sonarqube-credentials')
         //ARTIFACTORY_SERVER = 'artifactory'
         TARGET_REPO = 'libs-snapshot-local'
     }
