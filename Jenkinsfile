@@ -23,23 +23,23 @@ pipeline {
             }
         }
 
-		stage('Test') {
-		    agent {
-		        docker {
-		            image 'maven:3.9.6-eclipse-temurin-21'
-		            args '-v $WORKSPACE:/workspace -w /workspace -e HOME=/root -u 0'
-		        }
-		    }
-		    steps {
-		        echo "Ejecutando pruebas unitarias..."
-		        sh 'mvn -f /workspace/pom.xml test jacoco:report'
-		    }
-		    post {
-		        always {
-		            junit 'target/surefire-reports/*.xml'
-		        }
-		    }
-		}
+        stage('Test') {
+            agent {
+                docker {
+                    image 'maven:3.9.6-eclipse-temurin-21'
+                    args '-e HOME=/root -u 0'
+                }
+            }
+            steps {
+                echo "Ejecutando pruebas unitarias..."
+                sh 'mvn test jacoco:report'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
 
         /*stage('SonarQube Analysis') {
             agent {
