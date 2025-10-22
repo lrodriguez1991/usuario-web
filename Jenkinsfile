@@ -41,7 +41,7 @@ pipeline {
             }
         }
 
-        /*stage('SonarQube Analysis') {
+        stage('SonarQube Analysis') {
             agent {
                 docker {
                     image 'maven:3.9.6-eclipse-temurin-21'
@@ -50,7 +50,7 @@ pipeline {
             }
             steps {
                 echo "🔍 Analizando código con SonarQube..."
-                withSonarQubeEnv('SonarQube-Server') {
+                withSonarQubeEnv('sonarqube') {
                     sh """
                         mvn sonar:sonar \
                           -Dsonar.projectKey=usuario-web \
@@ -61,7 +61,7 @@ pipeline {
             }
         }
 
-        stage('Publish to Artifactory') {
+        /*stage('Publish to Artifactory') {
             steps {
                 script {
                     echo "Subiendo WAR a Artifactory mediante File Spec..."
