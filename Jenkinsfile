@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SONAR_HOST_URL = "http://localhost:9000"
+        SONAR_HOST_URL = "http://sonarqube:9000"
         SONAR_TOKEN = credentials('sonarqube-credentials')
         //ARTIFACTORY_SERVER = 'artifactory'
         TARGET_REPO = 'libs-snapshot-local'
@@ -45,7 +45,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.9.6-eclipse-temurin-21'
-                    args '-e HOME=/root -u 0'
+                    args '-e HOME=/root -u 0 --network jenkins-sonar'
                 }
             }
             steps {
