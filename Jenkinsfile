@@ -5,7 +5,7 @@ pipeline {
         SONAR_HOST_URL = "http://sonarqube:9000"
         SONAR_TOKEN = credentials('sonarqube-credentials')
         ARTIFACTORY_SERVER = 'artifactory'
-        TARGET_REPO = 'libs-snapshot-local'
+        TARGET_REPO = 'usuario-web'
     }
 
     stages {
