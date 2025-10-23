@@ -4,7 +4,7 @@ pipeline {
     environment {
         SONAR_HOST_URL = "http://sonarqube:9000"
         SONAR_TOKEN = credentials('sonarqube-credentials')
-        //ARTIFACTORY_SERVER = 'artifactory'
+        ARTIFACTORY_SERVER = 'artifactory'
         TARGET_REPO = 'libs-snapshot-local'
     }
 
@@ -61,7 +61,7 @@ pipeline {
             }
         }
 
-        /*stage('Publish to Artifactory') {
+        stage('Publish to Artifactory') {
             steps {
                 script {
                     echo "Subiendo WAR a Artifactory mediante File Spec..."
@@ -86,7 +86,7 @@ pipeline {
                     server.upload spec: uploadSpec
                 }
             }
-        }*/
+        }
     }
 
     post {
