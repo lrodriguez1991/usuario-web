@@ -92,8 +92,8 @@ pipeline {
     post {
         success {
             echo "Pipeline completado exitosamente: WAR subido a Artifactory"
-           // unstash 'war-file' // Asegúrate de que esté presente para archivarlo
-           // archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+            unstash 'war-file' // Asegúrate de que esté presente para archivarlo
+            archiveArtifacts artifacts: 'target/*.war', fingerprint: true
         }
         failure {
             echo "Falló el pipeline. Revisa los logs."
